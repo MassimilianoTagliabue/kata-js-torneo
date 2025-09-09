@@ -1,24 +1,40 @@
 import { useEffect, useState } from "react";
 import { faker } from "@faker-js/faker";
-import partecipants from "./data/FightersArray";
+import fighters from "./data/FightersArray";
+import weapons from "./data/WeaponsArray";
 
 
 function App() {
 
-  const [fighters, setFighters] = useState([])
-  
 
   useEffect(() => {
-
-    setFighters(partecipants);
-
+    
   }, []);
 
-console.log(fighters);
-
+  function randomNum() {
+    return Math.floor(Math.random() * 100) -1 ;
+  }
   
+  const arraynum = [];
 
+  const armed = fighters.map((curItem) => {
 
+    const num = randomNum();
+    console.log(num);
+    
+
+    if(!arraynum.includes(num)){
+      arraynum.push(num);
+    }else{
+
+      console.log("presente" + num);
+      
+    }
+    
+  });
+
+  console.log(arraynum);
+  
   
 
 

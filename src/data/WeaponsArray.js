@@ -7,16 +7,18 @@ const nameWeapons = [
 ];
 
 // Combinazione e variazione creativa per generare almeno 100 unici
-const generataName = () => {
-  const base = nomiArmi[Math.floor(Math.random() * nomiArmi.length)];
+const generateName = () => {
+  const base = nameWeapons[Math.floor(Math.random() * nameWeapons.length)];
   const suffissi = ["of Doom", "of Shadows", "Prime", "Alpha", "X", "Mk II"];
   const suffisso = suffissi[Math.floor(Math.random() * suffissi.length)];
   return `${base} ${suffisso}`;
 };
 
-const Weapons = Array.from({ length: 100 }, () => ({
+const weapons = Array.from({ length: 100 }, () => ({
   name: generateName(),
   multiplier: Math.floor(Math.random() * 100) + 1
 }));
 
-console.log(Weapons);
+
+
+export default weapons;
