@@ -6,36 +6,59 @@ import weapons from "./data/WeaponsArray";
 
 function App() {
 
+  const [armedFighters, setArmedFighters] = useState([]);
 
   useEffect(() => {
-    
+
   }, []);
 
+  //genera un numero casuale
   function randomNum() {
-    return Math.floor(Math.random() * 100) -1 ;
+    return Math.floor(Math.random() * 100);
   }
-  
+
+  //controlla che non venga scelto 2 volte lo stesso numero
+  function duplicate(num) {
+
+    if (arraynum.includes(num)) { //controllo se num è presente nell'array
+      const arraynumLength = arraynum.length; //salvo la lunghezza di arraynum
+      
+
+      while (arraynumLength === arraynum.length) { //il ciclo continua fino a quando non viene aggiunto un nuovo elemento
+        
+
+        const num2 = randomNum(); //genero un nuovo numero
+        if (!arraynum.includes(num2)) { // controllo se non è presente
+          arraynum.push(num2);  //aggiungo il numero
+        
+        } 
+      }
+
+    } else {//se non è presente lo aggiungo
+      
+      arraynum.push(num);
+      
+
+    }
+
+  }
+
+
   const arraynum = [];
 
-  const armed = fighters.map((curItem) => {
+  fighters.forEach((curItem) => {
 
     const num = randomNum();
-    console.log(num);
-    
 
-    if(!arraynum.includes(num)){
-      arraynum.push(num);
-    }else{
+    duplicate(num);
 
-      console.log("presente" + num);
-      
-    }
-    
+
   });
 
-  console.log(arraynum);
-  
-  
+
+  console.log(arraynum + " lunghezza" + arraynum.length);
+
+
 
 
   return (
