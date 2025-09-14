@@ -98,9 +98,21 @@ function App() {
     }
 
       
-      
-      
 
+        //fase 3: qualificazione
+      
+    function qualification (){
+      const qualificated = armedFighters.filter(curItem => {
+        //controllo quali fighters superano 2000
+        if(curItem.power > 2000){
+          return curItem
+        }
+      })
+
+      console.log(qualificated);
+      
+      setArmedFighters(qualificated);
+    }
 
     
     
@@ -113,7 +125,8 @@ function App() {
     <>
       <h2 className='text-center '>ciao</h2>
       
-      <button className="btn btn-primary mx-5 my-5" onClick={training} disabled={disabled}> bottone</button>
+      <button className="btn btn-primary mx-5 my-5" onClick={training} disabled={disabled}> allenamento</button>
+      <button className="btn btn-primary mx-5 my-5" onClick={qualification}>qualifica</button>
     </>
   )
 }
