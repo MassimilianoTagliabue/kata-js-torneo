@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker"; //faker libreria che genera dati finti
+import randomNum from "../utils/generateNumber";
 
 const fighters = generateFighters().map((curItem) => curItem);
 
@@ -11,10 +12,11 @@ const fighters = generateFighters().map((curItem) => curItem);
     return Array.from({ length: 20 }, () => ({
       
       name: faker.person.firstName(),
-      power: Math.floor(Math.random() * 100) + 1
+      power: randomNum(100) + 1
     }))
   }
 
+  //console.log(fighters);
   
   
   export default fighters;

@@ -1,3 +1,5 @@
+import randomNum from "../utils/generateNumber";
+
 const nameWeapons = [
   "Nightfall", "Skyfall", "Bloodthorn", "Thunderclap Dagger",
   "Shadowstrike Dagger", "Vortex Blaster", "Eclipse Axe", "Phantom Bow",
@@ -8,17 +10,18 @@ const nameWeapons = [
 
 // Combinazione e variazione creativa per generare almeno 100 unici
 const generateName = () => {
-  const base = nameWeapons[Math.floor(Math.random() * nameWeapons.length)];
+  const base = nameWeapons[randomNum(nameWeapons.length)];
   const suffissi = ["of Doom", "of Shadows", "Prime", "Alpha", "X", "Mk II"];
-  const suffisso = suffissi[Math.floor(Math.random() * suffissi.length)];
+  const suffisso = suffissi[randomNum(suffissi.length)];
   return `${base} ${suffisso}`;
 };
 
-const weapons = Array.from({ length: 100 }, () => ({
+const weapons = Array.from({ length: 20 }, () => ({
   name: generateName(),
-  multiplier: Math.floor(Math.random() * 100) + 1
+  multiplier: randomNum(100) + 1
 }));
 
+//console.log(weapons);
 
 
 export default weapons;
