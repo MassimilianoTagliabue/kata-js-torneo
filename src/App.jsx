@@ -52,10 +52,13 @@ function App() {
       const p2 = players[i + 1];
 
       const winner = Fight(p1, p2);
+      console.log("round vinto da " + winner.name);
+      
 
       winners.push(winner);
       losers.push(winner === p1 ? p2 : p1);
-    }
+      console.log("round perso da " + losers);
+    } 
 
     return { winners, losers }
   }
@@ -91,12 +94,22 @@ function App() {
 
       //aggiorno players per evitare un loop infinito
       players = winners;
+
+      //se i partecipanti sono dispari aggiungo un bot
+      if(players.length % 2 === 1 && players.length !== 1){
+        console.log("dispari");
+        
+        players.push({
+          name: "robot",
+          power: 4000
+        })}
+
       round++;
     }
 
     
     //stabilisco il campione
-    const champion = players[0];
+    let champion = players[0];
     let third;
     
     
