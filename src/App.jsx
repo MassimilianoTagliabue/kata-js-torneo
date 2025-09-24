@@ -34,13 +34,16 @@ function App() {
   }
 
 
+  //fase 4: tournament
   function startTournament() {
     Tournament(armedFighters)
   }
 
   return (
     <>
-      <h2 className='text-center '>ciao</h2>
+      <h2 className='text-center '>Benvenuto al Torne Boolkaichi</h2>
+
+      
 
       <button className="btn btn-primary mx-5 my-5" onClick={handleTraining} disabled={disabled}> allenamento</button>
       <button className="btn btn-primary mx-5 my-5" onClick={handleQualification}>qualifica</button>
