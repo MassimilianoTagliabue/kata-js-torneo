@@ -5,8 +5,7 @@ import training from "./utils/Training";
 import qualification from "./utils/Qualification";
 import Tournament from "./utils/Tournament";
 import { GlobalContext } from "./context/GlobalContext";
-
-
+import FighterCard from "./components/FighterCard";
 
 
 
@@ -27,6 +26,7 @@ function App() {
 
     //vado a disattivare il bottone 
     setDisabled(true);
+    
   }
 
 
@@ -53,11 +53,39 @@ function App() {
 
   return (
     <GlobalContext.Provider value={globalProviderValue}>
-      <h2 className='text-center my-4'>Benvenuto al Torne Boolkaichi</h2>0
+      <h2 className='text-center my-4'>Benvenuto al Torne Boolkaichi</h2>
+
+      <div className="container-md" onChange={setArmedFighters}>
+
+        {armedFighters.length > 0 ? (
+          <>
+            {armedFighters.map((curFighter, index) => {
+              <div key={index} className="mb-5">
+
+                  <FighterCard
+                    fighter={curFighter}                  
+                  />
+              </div>
+            })}
+
+
+        </>
+        
+      ) : (
+          <>
+            <div className="alert alert-light" role="alert">
+              Nessun combattente presente al momento
+            </div>
+          </>
+        )}
+        <FighterCard />
+      </div>
+
 
       <button className="btn btn-primary mx-5 my-5" onClick={handleTraining} disabled={disabled}> allenamento</button>
       <button className="btn btn-primary mx-5 my-5" onClick={handleQualification}>qualifica</button>
       <button className="btn btn-success mx-5 my-5" onClick={startTournament}>inizia Torneo</button>
+
     </GlobalContext.Provider>
   )
 }

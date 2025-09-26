@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-
+import FighterCard from "../components/FighterCard";
 
 function AppLayout(){
 
