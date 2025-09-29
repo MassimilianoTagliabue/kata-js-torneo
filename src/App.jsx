@@ -5,7 +5,8 @@ import training from "./utils/Training";
 import qualification from "./utils/Qualification";
 import Tournament from "./utils/Tournament";
 import { GlobalContext } from "./context/GlobalContext";
-import FighterCard from "./components/FighterCard";
+import FighterCard from "./components/FighterCard"
+
 
 
 
@@ -26,7 +27,7 @@ function App() {
 
     //vado a disattivare il bottone 
     setDisabled(true);
-    
+
   }
 
 
@@ -40,6 +41,8 @@ function App() {
   function startTournament() {
     Tournament(armedFighters)
   }
+
+
 
   const globalProviderValue = {
     armedFighters,
@@ -55,30 +58,32 @@ function App() {
     <GlobalContext.Provider value={globalProviderValue}>
       <h2 className='text-center my-4'>Benvenuto al Torne Boolkaichi</h2>
 
-      <div className="container-md" onChange={setArmedFighters}>
+      <div className="container " onChange={setArmedFighters}>
 
-        {armedFighters.length > 0 ? (
-          <>
-            {armedFighters.map((curFighter, index) => {
-              <div key={index} className="mb-5">
+        <div className="justify-content-center d-flex row">
+          {armedFighters.length > 0 ? (
+            <>
+              {armedFighters.map((curFighter, index) => {
+                return (
+                  <div key={index} className="mb-5 col-3">
 
-                  <FighterCard
-                    fighter={curFighter}                  
-                  />
+
+                    <FighterCard
+                      fighter={curFighter}
+                    />
+                  </div>)
+              })}
+
+            </>
+
+          ) : (
+            <>
+              <div className="alert alert-light" role="alert">
+                Nessun combattente presente al momento
               </div>
-            })}
-
-
-        </>
-        
-      ) : (
-          <>
-            <div className="alert alert-light" role="alert">
-              Nessun combattente presente al momento
-            </div>
-          </>
-        )}
-        <FighterCard />
+            </>
+          )}
+        </div>
       </div>
 
 
