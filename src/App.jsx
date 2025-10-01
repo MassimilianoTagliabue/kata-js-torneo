@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { faker, tr } from "@faker-js/faker";
 import generatedArmedFighters from "./utils/GenerateArmedFighters";
 import training from "./utils/Training";
 import qualification from "./utils/Qualification";
@@ -14,6 +13,8 @@ function App() {
 
   const [armedFighters, setArmedFighters] = useState([]);
   const [disabled, setDisabled] = useState(false);  //serve a disattivare il bottone dopo il click
+  const [showWinner, setShowWinner] = useState(false);
+  const [startedTournament, setStartedTournament] = useState(false);
 
   useEffect(() => {
     setArmedFighters(generatedArmedFighters());
@@ -40,6 +41,7 @@ function App() {
   //fase 4: tournament
   function startTournament() {
     Tournament(armedFighters)
+    setStartedTournament(true)
   }
 
 
@@ -60,34 +62,63 @@ function App() {
 
       <div className="container " onChange={setArmedFighters}>
 
-        <button className="btn btn-primary mx-5 my-5" onClick={handleTraining} disabled={disabled}> allenamento</button>
-      <button className="btn btn-primary mx-5 my-5" onClick={handleQualification}>qualifica</button>
-      <button className="btn btn-success mx-5 my-5" onClick={startTournament}>inizia Torneo</button>
+        <button className="btn btn-primary mx-5 my-5" onClick={handleTraining} disabled={disabled}> Allenamento</button>
+        <button className="btn btn-primary mx-5 my-5" onClick={handleQualification}>Qualifica</button>
+        <button className="btn btn-success mx-5 my-5" onClick={startTournament}>Inizia Torneo</button>
 
-        <div className="justify-content-center d-flex row">
-          {armedFighters.length > 0 ? (
-            <>
-              {armedFighters.map((curFighter, index) => {
-                return (
-                  <div key={index} className="mb-5 col-3">
+        {/* tasto visibile solo se il torneo è iniziato */}
+        {startedTournament ? (
+          <>
+            <button className="btn btn-warning mx-5 my-5" onClick={() => { showWinner ? (setShowWinner(false)) : (setShowWinner(true)) }}>
+              {showWinner ? ("Nascondi Classifica") : ("Mostra Classifica")}</button>
+          </>
+        ) : (
+          <>
+            <div className="alert alert-success col-6 mx-5 mb-3" role="alert">
+              la classifica sarà visibile solo una volta iniziato il torneo
+            </div>
+          </>
+        )}
 
 
-                    <FighterCard
-                      fighter={curFighter}
-                    />
-                  </div>)
-              })}
 
-            </>
 
-          ) : (
-            <>
-              <div className="alert alert-light" role="alert">
-                Nessun combattente presente al momento
-              </div>
-            </>
-          )}
-        </div>
+
+        {showWinner ? (
+          <>
+
+          </>
+
+        ) : (
+          <>
+
+            <div className="justify-content-center d-flex row mt-5">
+              {armedFighters.length > 0 ? (
+                <>
+                  {armedFighters.map((curFighter, index) => {
+                    return (
+                      <div key={index} className="mb-5 col-3">
+
+
+                        <FighterCard
+                          fighter={curFighter}
+                        />
+                      </div>)
+                  })}
+
+                </>
+
+              ) : (
+                <>
+                  <div className="alert alert-light" role="alert">
+                    Nessun combattente presente al momento
+                  </div>
+                </>
+              )}
+            </div>
+
+          </>)}
+
       </div>
 
 
