@@ -60,6 +60,10 @@ function App() {
 
       <div className="container " onChange={setArmedFighters}>
 
+        <button className="btn btn-primary mx-5 my-5" onClick={handleTraining} disabled={disabled}> allenamento</button>
+      <button className="btn btn-primary mx-5 my-5" onClick={handleQualification}>qualifica</button>
+      <button className="btn btn-success mx-5 my-5" onClick={startTournament}>inizia Torneo</button>
+
         <div className="justify-content-center d-flex row">
           {armedFighters.length > 0 ? (
             <>
@@ -86,10 +90,6 @@ function App() {
         </div>
       </div>
 
-
-      <button className="btn btn-primary mx-5 my-5" onClick={handleTraining} disabled={disabled}> allenamento</button>
-      <button className="btn btn-primary mx-5 my-5" onClick={handleQualification}>qualifica</button>
-      <button className="btn btn-success mx-5 my-5" onClick={startTournament}>inizia Torneo</button>
 
     </GlobalContext.Provider>
   )

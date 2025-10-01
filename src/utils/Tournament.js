@@ -3,7 +3,7 @@
 
   function Fight(player1, player2) {
     //operatore ternario che controlla il vincitore
-    return (player1 >= player2) ? player1 : player2;
+    return (player1.power >= player2.power) ? player1 : player2;
   }
 
 
@@ -18,7 +18,7 @@
       const p2 = players[i + 1];
 
       const winner = Fight(p1, p2);
-      //console.log("round vinto da " + winner.name);
+      console.log("round vinto da " + winner.name);
 
 
       winners.push(winner);
@@ -35,6 +35,10 @@
     let players = [...fighters];
     let semiFinalLosers = [];
     let round = 1;
+
+    //stabilisco il campione
+    let champion;
+    let third;
     let second;
 
     while (players.length > 1) {
@@ -58,6 +62,7 @@
 
       if (players.length === 2) {
         second = losers[0];
+        champion = winners[0];
       }
 
       //aggiorno players per evitare un loop infinito
@@ -77,9 +82,7 @@
     }
 
 
-    //stabilisco il campione
-    let champion = players[0];
-    let third;
+    
 
 
     //spareggio per il 3° posto
