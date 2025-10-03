@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import generatedArmedFighters from "./utils/GenerateArmedFighters";
 import training from "./utils/Training";
 import qualification from "./utils/Qualification";
@@ -6,13 +6,17 @@ import Tournament from "./utils/Tournament";
 import { GlobalContext } from "./context/GlobalContext";
 import FighterCard from "./components/FighterCard"
 
-
+const turnBtn = {
+  btnTraining: false,
+  btnQualification: true,
+  btnStart:true
+}
 
 
 function App() {
 
   const [armedFighters, setArmedFighters] = useState([]);
-  const [disabled, setDisabled] = useState(false);  //serve a disattivare il bottone dopo il click
+  const [turnOff, setTurnOff] = useState(turnBtn);  //serve a disattivare il bottone dopo il click
   const [showWinner, setShowWinner] = useState(false);
   const [startedTournament, setStartedTournament] = useState(false);
 
@@ -27,7 +31,11 @@ function App() {
     setArmedFighters(training(armedFighters));
 
     //vado a disattivare il bottone 
-    setDisabled(true);
+    setTurnOff(btn => ({
+      ...btn,
+      btnTraining:true,
+      btnQualification:false
+    }));
 
   }
 
@@ -35,6 +43,11 @@ function App() {
   //fase 3: qualification
   function handleQualification() {
     setArmedFighters(qualification(armedFighters))
+    setTurnOff(btn => ({
+      ...btn,
+      btnStart:false,
+      btnQualification:true
+    }));
   }
 
 
@@ -49,8 +62,8 @@ function App() {
   const globalProviderValue = {
     armedFighters,
     setArmedFighters,
-    disabled,
-    setDisabled,
+    turnOff,
+    setTurnOff,
     handleTraining,
     handleQualification,
     startTournament,
@@ -62,9 +75,9 @@ function App() {
 
       <div className="container " onChange={setArmedFighters}>
 
-        <button className="btn btn-primary mx-5 my-5" onClick={handleTraining} disabled={disabled}> Allenamento</button>
-        <button className="btn btn-primary mx-5 my-5" onClick={handleQualification}>Qualifica</button>
-        <button className="btn btn-success mx-5 my-5" onClick={startTournament}>Inizia Torneo</button>
+        <button className="btn btn-primary mx-5 my-5" onClick={handleTraining} disabled={turnOff.btnTraining}> Allenamento</button>
+        <button className="btn btn-primary mx-5 my-5" onClick={handleQualification} disabled={turnOff.btnQualification}>Qualifica</button>
+        <button className="btn btn-success mx-5 my-5" onClick={startTournament} disabled={turnOff.btnStart}>Inizia Torneo</button>
 
         {/* tasto visibile solo se il torneo è iniziato */}
         {startedTournament ? (
