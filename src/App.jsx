@@ -19,11 +19,17 @@ function App() {
   const [turnOff, setTurnOff] = useState(turnBtn);  //serve a disattivare il bottone dopo il click
   const [showWinner, setShowWinner] = useState(false);
   const [startedTournament, setStartedTournament] = useState(false);
+  const [winners, setWinners] = useState([])
 
   useEffect(() => {
     setArmedFighters(generatedArmedFighters());
 
   }, []);
+
+  useEffect(() => {
+    console.log(winners);
+    
+  },[winners])
 
 
   //fase 2: training
@@ -52,9 +58,24 @@ function App() {
 
 
   //fase 4: tournament
+  
   function startTournament() {
-    Tournament(armedFighters)
+    const [champion,second,third] = Tournament(armedFighters);
+
+    const tempWinner = [champion, second, third];
+    //console.log(tempWinner);
+    
+      setWinners(tempWinner)
+
+    
+    
+    
     setStartedTournament(true)
+    setTurnOff(btn => ({
+      ...btn,
+      btnStart:true
+    }));
+// 
   }
 
 
@@ -73,6 +94,7 @@ function App() {
     <GlobalContext.Provider value={globalProviderValue}>
       <h2 className='text-center my-4'>Benvenuto al Torne Boolkaichi</h2>
 
+      
       <div className="container " onChange={setArmedFighters}>
 
         <button className="btn btn-primary mx-5 my-5" onClick={handleTraining} disabled={turnOff.btnTraining}> Allenamento</button>
@@ -94,12 +116,8 @@ function App() {
         )}
 
 
-
-
-
         {showWinner ? (
           <>
-
           </>
 
         ) : (

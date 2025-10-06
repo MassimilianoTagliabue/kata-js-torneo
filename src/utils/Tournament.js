@@ -18,12 +18,12 @@
       const p2 = players[i + 1];
 
       const winner = Fight(p1, p2);
-      console.log("round vinto da " + winner.name);
+      //console.log("round vinto da " + winner.name);
 
 
       winners.push(winner);
       losers.push(winner === p1 ? p2 : p1);
-      //console.log("round perso da " + losers);
+      //console.log("round perso da " + losers.name);
     }
 
     return { winners, losers }
@@ -43,7 +43,7 @@
 
     while (players.length > 1) {
 
-      console.log("round N° " + round);
+      //console.log("round N° " + round);
       const { winners, losers } = playRound(players);
 
 
@@ -95,6 +95,8 @@
 
     console.log("🥈 Secondo Posto : " + second.name);
     console.log("🥇 Vicitore : " + champion.name);
+
+    return [champion,second,third]; 
 
   }
 
