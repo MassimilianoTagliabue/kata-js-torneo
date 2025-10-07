@@ -5,6 +5,7 @@ import qualification from "./utils/Qualification";
 import Tournament from "./utils/Tournament";
 import { GlobalContext } from "./context/GlobalContext";
 import FighterCard from "./components/FighterCard";
+import WinnerCard from "./components/WinnerCard";
 import Confetti from "react-confetti";
 
 
@@ -96,7 +97,7 @@ function App() {
 
   return (
     <GlobalContext.Provider value={globalProviderValue}>
-      <h2 className='text-center my-4'>Benvenuto al Torne Boolkaichi</h2>
+      <h2 className='text-center my-4'>Benvenuto al Torneo Boolkaichi</h2>
 
 
       <div className="container " onChange={setArmedFighters}>
@@ -111,7 +112,7 @@ function App() {
             <button className="btn btn-warning mx-5 my-5" onClick={() => {
               showWinner ? (setShowWinner(false)) : (setShowWinner(true));
 
-              if(!showWinner){
+              if (!showWinner) {
                 setShowConfetti(true);
                 setTimeout(() => setShowConfetti(false), 5000);
               }
@@ -131,16 +132,20 @@ function App() {
 
         {showWinner ? (
           <>
-            {winners.map((winner, index) => {
-              return (
-                <div key={index} className="mb-5 col-3">
 
+            <WinnerCard
+              fighter={winners[0]}
+            />
 
-                  <FighterCard
-                    fighter={winner}
-                  />
-                </div>)
-            })}
+            <div className="flex pt-8">
+              <WinnerCard
+                fighter={winners[1]}
+              />
+              <WinnerCard
+                fighter={winners[2]}
+              />
+            </div>
+
           </>
 
         ) : (
